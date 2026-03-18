@@ -1,0 +1,21 @@
+-- Crear base de datos si no existe
+IF DB_ID('${DB_NAME}') IS NULL
+BEGIN
+    CREATE DATABASE [${DB_NAME}];
+END
+
+-- Usar la base de datos
+USE [${DB_NAME}];
+
+-- (Opcional) Crear login si no existe
+IF NOT EXISTS (SELECT * FROM sys.server_principals WHERE name = '${DB_USER}')
+BEGIN
+    CREATE LOGIN [${DB_USER}] WITH PASSWORD = '${DB_PASSWORD}';
+END
+
+-- Crear usuario dentro de la DB
+IF NOT EXISTS (SELECT * FROM sys.database_principals WHERE name = '${DB_USER}')
+BEGIN
+    CREATE USER [${DB_USER}] FOR LOGIN [${DB_USER}];
+    ALTER ROLE db_owner ADD MEMBER [${DB_USER}];
+END

@@ -1,0 +1,25 @@
+# .NET
+AgendaMedica/bin/
+AgendaMedica/obj/
+AgendaMedica/Properties/
+
+# Flyway — credenciales locales
+flyway.conf
+flyway-prod.conf
+flyway-dev.conf
+
+# Init — credenciales locales
+init/init-db-dev.sql
+init/init-db-prod.sql
+
+# Solo suben las plantillas
+!flyway.conf.template
+!init/init-db.sql.template
+
+# Docker
+.env
+
+# IDE
+.vs/
+.vscode/
+*.user

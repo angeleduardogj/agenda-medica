@@ -1,0 +1,4 @@
+flyway.url=jdbc:sqlserver://localhost:1433;databaseName=AgendaMedicaDB;encrypt=true;trustServerCertificate=true
+flyway.user=YOUR_USER
+flyway.password=YOUR_PASSWORD
+flyway.locations=filesystem:./db/migrations
