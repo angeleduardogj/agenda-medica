@@ -1,0 +1,78 @@
+using AgendaMedica.Models;
+using AgendaMedica.Services;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
+
+namespace AgendaMedica.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class CitasController(CitaService citaService) : ControllerBase
+{
+    [HttpPost("agendar")]
+    public async Task<ActionResult<CitaResponse>> Agendar(AgendarCitaRequest request)
+    {
+        try
+        {
+            var cita = await citaService.AgendarAsync(request);
+            return Created(string.Empty, cita);
+        }
+        catch (SqlException ex) when (
+            ex.Number >= 50000
+            && (
+                ex.Message.Contains("ya tiene una cita", StringComparison.OrdinalIgnoreCase)
+                || ex.Message.Contains("fuera del horario de consulta", StringComparison.OrdinalIgnoreCase)
+                || ex.Message.Contains("no tiene horario de consulta configurado", StringComparison.OrdinalIgnoreCase)
+            )
+        )
+        {
+            IEnumerable<HorarioSugeridoResponse> sugerencias = [];
+            try
+            {
+                sugerencias = await citaService.SugerirHorariosAsync(request.MedicoId, request.Fecha, request.HoraInicio, 3);
+            }
+            catch (SqlException)
+            {
+            }
+
+            return Conflict(new
+            {
+                status = 409,
+                error = ex.Message,
+                sugerencias
+            });
+        }
+    }
+
+    [HttpPut("cancelar/{citaId}")]
+    public async Task<ActionResult<CitaResponse>> Cancelar(int citaId, CancelarCitaRequest request)
+    {
+        var cita = await citaService.CancelarAsync(citaId, request);
+        return Ok(cita);
+    }
+
+    [HttpGet("consultar")]
+    public async Task<ActionResult<IEnumerable<CitaConsultaResponse>>> Consultar(
+        [FromQuery] int? medicoId,
+        [FromQuery] int? pacienteId,
+        [FromQuery] DateTime? fechaDesde,
+        [FromQuery] DateTime? fechaHasta,
+        [FromQuery] string? estado
+    )
+    {
+        var citas = await citaService.ConsultarAsync(medicoId, pacienteId, fechaDesde, fechaHasta, estado);
+        return Ok(citas);
+    }
+
+    [HttpGet("sugerencias")]
+    public async Task<ActionResult<IEnumerable<HorarioSugeridoResponse>>> Sugerencias(
+        [FromQuery] int medicoId,
+        [FromQuery] DateTime fecha,
+        [FromQuery] TimeSpan horaInicioDeseada,
+        [FromQuery] int cantidad = 3
+    )
+    {
+        var sugerencias = await citaService.SugerirHorariosAsync(medicoId, fecha, horaInicioDeseada, cantidad);
+        return Ok(sugerencias);
+    }
+}
