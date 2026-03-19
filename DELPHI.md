@@ -1,0 +1,3 @@
+# Nota de migración desde Delphi legacy
+
+Si este módulo viniera de una aplicación Delphi antigua, lo ideal sería migrarlo por etapas para que el negocio no se detenga. Primero conservaría las reglas importantes (agenda, choques de citas, cancelaciones y horarios) en base de datos para mantener el mismo comportamiento. Después movería poco a poco la lógica de pantallas a servicios y API, de forma que el sistema viejo y el nuevo puedan convivir un tiempo. También pondría mucha atención en fechas y horas para que no cambien resultados entre versiones. La meta sería que para el usuario final el cambio se sienta natural: mismos datos, mismas reglas, pero con una plataforma más moderna, mantenible y fácil de escalar.

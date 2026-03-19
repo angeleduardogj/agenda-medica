@@ -1,0 +1,740 @@
+{
+	"info": {
+		"_postman_id": "agenda-medica-collection",
+		"name": "Agenda Medica Api Angel Gaxiola",
+		"description": "Colección de endpoints para la gestión de médicos y horarios en la Agenda Médica.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Medicos",
+			"item": [
+				{
+					"name": "1. Crear Médico",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"Angel Eduardo\",\n  \"apellidoPaterno\": \"Gaxiola\",\n  \"apellidoMaterno\": \"Javier\",\n  \"especialidadId\": 1,\n  \"telefono\": \"6624707957\",\n  \"email\": \"angeleduardogj@gmail.com\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/medicos/crear",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"medicos",
+								"crear"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3. Obtener Todos los Médicos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/medicos/obtener",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"medicos",
+								"obtener"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4. Obtener Médico Por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/medicos/obtener_id/3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"medicos",
+								"obtener_id",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "6. Actualizar Médico",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"Angel Eduardo\",\n  \"apellidoPaterno\": \"Gaxiola\",\n  \"apellidoMaterno\": \"Javier\",\n  \"especialidadId\": 2,\n  \"telefono\": \"6629876543\",\n  \"email\": \"angel.gaxiola@email.com\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/medicos/actualizar/3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"medicos",
+								"actualizar",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "9. Eliminar Médico",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/medicos/eliminar/3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"medicos",
+								"eliminar",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Horarios",
+			"item": [
+				{
+					"name": "2. Crear Horario",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"medicoId\": 3,\n  \"diaSemana\": 1,\n  \"horaInicio\": \"08:00:00\",\n  \"horaFin\": \"14:00:00\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/medicos/horario/crear",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"medicos",
+								"horario",
+								"crear"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5. Obtener Horarios de Médico",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/medicos/horario/3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"medicos",
+								"horario",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "7. Actualizar Horario",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"diaSemana\": 1,\n  \"horaInicio\": \"09:00:00\",\n  \"horaFin\": \"15:00:00\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/medicos/horario/actualizar/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"medicos",
+								"horario",
+								"actualizar",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "8. Eliminar Horario",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/medicos/horario/eliminar/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"medicos",
+								"horario",
+								"eliminar",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pacientes",
+			"item": [
+				{
+					"name": "Crear Paciente",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"Juan\",\n  \"apellidoPaterno\": \"Perez\",\n  \"apellidoMaterno\": \"Gomez\",\n  \"fechaNacimiento\": \"1990-01-15\",\n  \"telefono\": \"5551234567\",\n  \"email\": \"juan.perez@email.com\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/pacientes/crear",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pacientes",
+								"crear"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Todos los Pacientes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/pacientes/obtener",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pacientes",
+								"obtener"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Paciente por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/pacientes/obtener/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pacientes",
+								"obtener",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Paciente",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"Juan Alberto\",\n  \"apellidoPaterno\": \"Perez\",\n  \"apellidoMaterno\": \"Gomez\",\n  \"fechaNacimiento\": \"1990-01-15\",\n  \"telefono\": \"5557654321\",\n  \"email\": \"juan.alberto.perez@email.com\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/pacientes/actualizar/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pacientes",
+								"actualizar",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Paciente",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/pacientes/eliminar/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pacientes",
+								"eliminar",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Citas",
+			"item": [
+				{
+					"name": "Agendar Cita",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"medicoId\": 3,\n  \"pacienteId\": 1,\n  \"fecha\": \"2026-03-23\",\n  \"horaInicio\": \"09:00:00\",\n  \"motivo\": \"Consulta general\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/citas/agendar",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"citas",
+								"agendar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Consultar Citas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/citas/consultar?medicoId=3&pacienteId=1&fechaDesde=2026-03-01&fechaHasta=2026-03-31&estado=Programada",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"citas",
+								"consultar"
+							],
+							"query": [
+								{
+									"key": "medicoId",
+									"value": "3"
+								},
+								{
+									"key": "pacienteId",
+									"value": "1"
+								},
+								{
+									"key": "fechaDesde",
+									"value": "2026-03-01"
+								},
+								{
+									"key": "fechaHasta",
+									"value": "2026-03-31"
+								},
+								{
+									"key": "estado",
+									"value": "Programada"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancelar Cita",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"motivoCancelacion\": \"Paciente solicita reprogramación\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/citas/cancelar/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"citas",
+								"cancelar",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sugerir Horarios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/citas/sugerencias?medicoId=3&fecha=2026-03-25&horaInicioDeseada=09:00:00&cantidad=3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"citas",
+								"sugerencias"
+							],
+							"query": [
+								{
+									"key": "medicoId",
+									"value": "3"
+								},
+								{
+									"key": "fecha",
+									"value": "2026-03-25"
+								},
+								{
+									"key": "horaInicioDeseada",
+									"value": "09:00:00"
+								},
+								{
+									"key": "cantidad",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reglas Citas con datos seed",
+			"item": [
+				{
+					"name": "1. Obtener Médico seed (id 1)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/medicos/obtener_id/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"medicos",
+								"obtener_id",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2. Obtener horario seed médico 1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/medicos/horario/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"medicos",
+								"horario",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3. Regla 1 y 6 - Conflicto simultáneo con sugerencias",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"medicoId\": 1,\n  \"pacienteId\": 1,\n  \"fecha\": \"2099-01-05\",\n  \"horaInicio\": \"09:00:00\",\n  \"motivo\": \"Conflicto con cita seed\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/citas/agendar",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"citas",
+								"agendar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4. Regla 3 - Fuera de horario",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"medicoId\": 1,\n  \"pacienteId\": 1,\n  \"fecha\": \"2099-01-05\",\n  \"horaInicio\": \"14:00:00\",\n  \"motivo\": \"Intento fuera de horario seed\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/citas/agendar",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"citas",
+								"agendar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5. Regla 4 - Cita en el pasado",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"medicoId\": 1,\n  \"pacienteId\": 1,\n  \"fecha\": \"2025-01-01\",\n  \"horaInicio\": \"09:00:00\",\n  \"motivo\": \"Intento en fecha pasada seed\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/citas/agendar",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"citas",
+								"agendar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "6. Regla 5 - Alerta de cancelaciones",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"medicoId\": 1,\n  \"pacienteId\": 1,\n  \"fecha\": \"2099-01-05\",\n  \"horaInicio\": \"10:00:00\",\n  \"motivo\": \"Validar alerta cancelaciones seed\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/citas/agendar",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"citas",
+								"agendar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "7. Consultar citas seed",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/citas/consultar?medicoId=1&pacienteId=1&fechaDesde=2099-01-01&fechaHasta=2099-01-31",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"citas",
+								"consultar"
+							],
+							"query": [
+								{
+									"key": "medicoId",
+									"value": "1"
+								},
+								{
+									"key": "pacienteId",
+									"value": "1"
+								},
+								{
+									"key": "fechaDesde",
+									"value": "2099-01-01"
+								},
+								{
+									"key": "fechaHasta",
+									"value": "2099-01-31"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "8. Cancelar cita seed (id 1)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"motivoCancelacion\": \"Cancelación de prueba seed\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/citas/cancelar/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"citas",
+								"cancelar",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:5022",
+			"type": "string"
+		}
+	]
+}
