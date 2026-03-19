@@ -35,3 +35,9 @@
 - Configurar correctamente el flujo de depuración de pruebas unitarias en VS Code (C# Dev Kit + Test Explorer).
 - Dejar perfiles y pasos documentados para ejecutar `Debug Test` por método/clase sin fricción.
 - Estandarizar breakpoints, filtros de tests y ejecución por proyecto para evitar diferencias entre equipos.
+
+## 7) Implementar transacciones en SQL
+
+- Incorporar transacciones explícitas en SPs críticos (`BEGIN TRANSACTION`, `COMMIT`, `ROLLBACK`).
+- Definir estrategia para manejo de errores.
+- Priorizar operaciones de citas que mezclan múltiples validaciones, cambios de estado o que se pueden dar casos de concurrencia.
