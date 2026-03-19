@@ -29,3 +29,9 @@
 - Terminar configuración por entorno para cadenas de conexión (dev, qa, prod).
 - No quedó concluido por conflictos de configuración no nativa en el flujo actual.
 - Dejar centralizado y estandarizado el uso de variables para evitar cambios manuales.
+
+## 6) Depuración de Unit Tests en VS Code
+
+- Configurar correctamente el flujo de depuración de pruebas unitarias en VS Code (C# Dev Kit + Test Explorer).
+- Dejar perfiles y pasos documentados para ejecutar `Debug Test` por método/clase sin fricción.
+- Estandarizar breakpoints, filtros de tests y ejecución por proyecto para evitar diferencias entre equipos.
