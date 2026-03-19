@@ -126,6 +126,62 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "10. Agenda del día (Médico)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/medicos/agenda/1?fecha=2026-03-23",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"medicos",
+								"agenda",
+								"1"
+							],
+							"query": [
+								{
+									"key": "fecha",
+									"value": "2026-03-23"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "11. Horarios disponibles (Médico)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/medicos/horario-disponible/1?fecha=2026-03-23&cantidad=5",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"medicos",
+								"horario-disponible",
+								"1"
+							],
+							"query": [
+								{
+									"key": "fecha",
+									"value": "2026-03-23"
+								},
+								{
+									"key": "cantidad",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -351,6 +407,26 @@
 								"api",
 								"pacientes",
 								"eliminar",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Historial de citas (Paciente)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/pacientes/historial/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"pacientes",
+								"historial",
 								"1"
 							]
 						}

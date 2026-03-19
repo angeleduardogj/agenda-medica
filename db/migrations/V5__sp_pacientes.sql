@@ -120,3 +120,34 @@ BEGIN
     WHERE id = @id;
 END;
 GO
+
+-- Historial de citas por paciente
+CREATE OR ALTER PROCEDURE dbo.sp_mst_pacientes_historial_citas
+    @paciente_id INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT
+        c.id AS Id,
+        c.medico AS MedicoId,
+        CONCAT(m.nombre, ' ', m.apellido_paterno, COALESCE(' ' + m.apellido_materno, '')) AS MedicoNombre,
+        c.paciente AS PacienteId,
+        CONCAT(p.nombre, ' ', p.apellido_paterno, COALESCE(' ' + p.apellido_materno, '')) AS PacienteNombre,
+        c.fecha_hora_inicio AS FechaHoraInicio,
+        c.fecha_hora_fin AS FechaHoraFin,
+        c.motivo AS Motivo,
+        c.estado AS Estado,
+        c.motivo_cancelacion AS MotivoCancelacion,
+        c.fecha_cancelacion AS FechaCancelacion,
+        c.fecha_creacion AS FechaCreacion,
+        e.nombre AS EspecialidadNombre,
+        e.duracion_minutos AS DuracionMinutos
+    FROM dbo.trx_citas c
+    INNER JOIN dbo.mst_medicos m ON m.id = c.medico
+    INNER JOIN dbo.cat_especialidades e ON e.id = m.especialidad
+    INNER JOIN dbo.mst_pacientes p ON p.id = c.paciente
+    WHERE c.paciente = @paciente_id
+    ORDER BY c.fecha_hora_inicio DESC;
+END;
+GO
