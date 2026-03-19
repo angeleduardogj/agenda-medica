@@ -48,6 +48,37 @@ public class MedicoService(string connectionString)
         );
     }
 
+    public async Task<IEnumerable<CitaConsultaResponse>> ObtenerAgendaDiaAsync(int medicoId, DateTime fecha)
+    {
+        using var conn = new SqlConnection(connectionString);
+
+        return await conn.QueryAsync<CitaConsultaResponse>(
+            "sp_mst_medicos_agenda_dia",
+            new
+            {
+                medico_id = medicoId,
+                fecha = fecha.Date
+            },
+            commandType: CommandType.StoredProcedure
+        );
+    }
+
+    public async Task<IEnumerable<HorarioDisponibleResponse>> ObtenerHorariosDisponiblesAsync(int medicoId, DateTime fecha, int cantidad = 5)
+    {
+        using var conn = new SqlConnection(connectionString);
+
+        return await conn.QueryAsync<HorarioDisponibleResponse>(
+            "sp_mst_medicos_horarios_disponibles",
+            new
+            {
+                medico_id = medicoId,
+                fecha = fecha.Date,
+                cantidad
+            },
+            commandType: CommandType.StoredProcedure
+        );
+    }
+
 
     public async Task<MedicoResponse> CrearAsync(CrearMedicoRequest request)
     {

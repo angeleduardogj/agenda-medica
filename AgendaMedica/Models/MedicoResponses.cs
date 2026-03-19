@@ -22,3 +22,12 @@ public class HorarioResponse
     public TimeSpan HoraInicio { get; set; }
     public TimeSpan HoraFin { get; set; }
 }
+
+public class HorarioDisponibleResponse
+{
+    public int MedicoId { get; set; }
+    public DateTime FechaHoraInicio { get; set; }
+    public DateTime FechaHoraFin { get; set; }
+    public string? EspecialidadNombre { get; set; }
+    public int DuracionMinutos { get; set; }
+}

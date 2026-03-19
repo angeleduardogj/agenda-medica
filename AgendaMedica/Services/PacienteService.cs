@@ -81,4 +81,18 @@ public class PacienteService(string connectionString)
             commandType: CommandType.StoredProcedure
         );
     }
+
+    public async Task<IEnumerable<CitaConsultaResponse>> ObtenerHistorialCitasAsync(int pacienteId)
+    {
+        using var conn = new SqlConnection(connectionString);
+
+        return await conn.QueryAsync<CitaConsultaResponse>(
+            "sp_mst_pacientes_historial_citas",
+            new
+            {
+                paciente_id = pacienteId
+            },
+            commandType: CommandType.StoredProcedure
+        );
+    }
 }

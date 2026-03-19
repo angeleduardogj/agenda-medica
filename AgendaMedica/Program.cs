@@ -8,6 +8,8 @@ var connectionString = builder.Configuration.GetConnectionString("AgendaMedica")
 
 
 builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 builder.Services.AddScoped(_ => new MedicoService(connectionString));
 builder.Services.AddScoped(_ => new PacienteService(connectionString));
 builder.Services.AddScoped(_ => new CitaService(connectionString));
@@ -17,6 +19,8 @@ var app = builder.Build();
 
 app.UseMiddleware<ErrorMiddleware>();
 
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.MapControllers();
 

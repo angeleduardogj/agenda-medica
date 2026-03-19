@@ -42,4 +42,11 @@ public class PacientesController(PacienteService pacienteService) : ControllerBa
         await pacienteService.EliminarAsync(id);
         return NoContent();
     }
+
+    [HttpGet("historial/{pacienteId}")]
+    public async Task<ActionResult<IEnumerable<CitaConsultaResponse>>> Historial(int pacienteId)
+    {
+        var historial = await pacienteService.ObtenerHistorialCitasAsync(pacienteId);
+        return Ok(historial);
+    }
 }

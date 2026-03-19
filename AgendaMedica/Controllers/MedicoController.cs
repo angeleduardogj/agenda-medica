@@ -51,6 +51,20 @@ public class MedicosController(MedicoService medicoService) : ControllerBase
         return Ok(horarios);
     }
 
+    [HttpGet("agenda/{medicoId}")]
+    public async Task<ActionResult<IEnumerable<CitaConsultaResponse>>> sp_mst_medicos_agendadia(int medicoId, [FromQuery] DateTime fecha)
+    {
+        var agenda = await medicoService.ObtenerAgendaDiaAsync(medicoId, fecha);
+        return Ok(agenda);
+    }
+
+    [HttpGet("horario-disponible/{medicoId}")]
+    public async Task<ActionResult<IEnumerable<HorarioDisponibleResponse>>> sp_mst_medicos_horariosdisponibles(int medicoId, [FromQuery] DateTime fecha, [FromQuery] int cantidad = 5)
+    {
+        var horarios = await medicoService.ObtenerHorariosDisponiblesAsync(medicoId, fecha, cantidad);
+        return Ok(horarios);
+    }
+
     [HttpPost("horario/crear")]
     public async Task<ActionResult<HorarioResponse>> sp_mst_horarios_crear(CrearHorarioRequest request)
     {
