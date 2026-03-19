@@ -1,28 +1,45 @@
 using System.Data;
+using AgendaMedica.Middleware;
 using AgendaMedica.Models;
 using Dapper;
 using Microsoft.Data.SqlClient;
 
 namespace AgendaMedica.Services;
 
-public class CitaService(string connectionString)
+public class CitaService(string connectionString) : ICitaService
 {
     public async Task<CitaResponse> AgendarAsync(AgendarCitaRequest request)
     {
         using var conn = new SqlConnection(connectionString);
+        try
+        {
+            return await conn.QuerySingleAsync<CitaResponse>(
+                "sp_trx_citas_agendar",
+                new
+                {
+                    medico_id = request.MedicoId,
+                    paciente_id = request.PacienteId,
+                    fecha = request.Fecha.Date,
+                    hora_inicio = request.HoraInicio,
+                    motivo = request.Motivo.Trim()
+                },
+                commandType: CommandType.StoredProcedure
+            );
+        }
+        catch (SqlException ex) when (ex.Number >= 50000)
+        {
+            var statusCode = 400;
+            if (ex.Message.Contains("no existe", StringComparison.OrdinalIgnoreCase) || ex.Message.Contains("no se encontró", StringComparison.OrdinalIgnoreCase))
+                statusCode = 404;
+            else if (ex.Message.Contains("ya tiene una cita", StringComparison.OrdinalIgnoreCase)
+                || ex.Message.Contains("fuera del horario de consulta", StringComparison.OrdinalIgnoreCase)
+                || ex.Message.Contains("no tiene horario de consulta configurado", StringComparison.OrdinalIgnoreCase)
+                || ex.Message.Contains("ya existe", StringComparison.OrdinalIgnoreCase)
+                || ex.Message.Contains("solapa", StringComparison.OrdinalIgnoreCase))
+                statusCode = 409;
 
-        return await conn.QuerySingleAsync<CitaResponse>(
-            "sp_trx_citas_agendar",
-            new
-            {
-                medico_id = request.MedicoId,
-                paciente_id = request.PacienteId,
-                fecha = request.Fecha.Date,
-                hora_inicio = request.HoraInicio,
-                motivo = request.Motivo.Trim()
-            },
-            commandType: CommandType.StoredProcedure
-        );
+            throw new RulesException(ex.Message, statusCode);
+        }
     }
 
     public async Task<CitaResponse> CancelarAsync(int citaId, CancelarCitaRequest request)

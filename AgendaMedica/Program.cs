@@ -12,7 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped(_ => new MedicoService(connectionString));
 builder.Services.AddScoped(_ => new PacienteService(connectionString));
-builder.Services.AddScoped(_ => new CitaService(connectionString));
+builder.Services.AddScoped<ICitaService>(_ => new CitaService(connectionString));
 
 var app = builder.Build();
 

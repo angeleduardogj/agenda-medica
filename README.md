@@ -65,6 +65,39 @@ dotnet run
 
 Por defecto la API está en `http://localhost:5022` (según tu configuración actual).
 
+## Probar con Postman
+
+- Colección: [AgendaMedica.postman_collection.json](file:///c:/Users/angel.gaxiola/Documents/angel/agenda-medica/AgendaMedica.postman_collection.json)
+- Guía completa: [POSTMAN.md](file:///c:/Users/angel.gaxiola/Documents/angel/agenda-medica/POSTMAN.md)
+
+Pasos rápidos:
+
+1. Importar `AgendaMedica.postman_collection.json` en Postman.
+2. Verificar que `base_url` sea `http://localhost:5022`.
+3. Ejecutar por carpetas (`Medicos`, `Horarios`, `Pacientes`, `Citas`).
+4. Para reglas de negocio de citas, usar `Reglas Citas con datos seed`.
+
+## Unit Tests
+
+El proyecto de pruebas está en:
+
+- [AgendaMedica.Tests.csproj](file:///c:/Users/angel.gaxiola/Documents/angel/agenda-medica/AgendaMedica.Tests/AgendaMedica.Tests.csproj)
+- Tests actuales de reglas de citas: [CitasRulesTests.cs](file:///c:/Users/angel.gaxiola/Documents/angel/agenda-medica/AgendaMedica.Tests/Controllers/CitasRulesTests.cs)
+
+Ejecutar todos los tests:
+
+```bash
+dotnet test .\AgendaMedica.Tests\AgendaMedica.Tests.csproj
+```
+
+Qué cubren los tests actuales:
+
+- conflicto de horario con respuesta `409`,
+- sugerencias de horario en conflicto,
+- caso sin sugerencias (lista vacía),
+- validación de duración por especialidad en respuesta,
+- alerta de cancelaciones (`3+` en últimos 30 días).
+
 ## Estructura de base de datos
 
 ### Tablas principales
@@ -76,7 +109,9 @@ Por defecto la API está en `http://localhost:5022` (según tu configuración ac
 - `trx_citas`: transacciones de citas.
 
 ### Diagrama ER
-Imagen: [er-diagram.png](file:///c:/Users/angel.gaxiola/Documents/angel/agenda-medica/er-diagram.png)
+![Diagrama ER](./er-diagram.png)
+
+Si no se muestra en tu visor, puedes abrirla directo aquí: [er-diagram.png](file:///c:/Users/angel.gaxiola/Documents/angel/agenda-medica/er-diagram.png)
 
 ## Decisiones de diseño
 
@@ -95,3 +130,5 @@ Imagen: [er-diagram.png](file:///c:/Users/angel.gaxiola/Documents/angel/agenda-m
 
 - [POSTMAN.md](file:///c:/Users/angel.gaxiola/Documents/angel/agenda-medica/POSTMAN.md)
 - [MIGRACION.md](file:///c:/Users/angel.gaxiola/Documents/angel/agenda-medica/MIGRACION.md)
+- [DELPHI.md](file:///c:/Users/angel.gaxiola/Documents/angel/agenda-medica/DELPHI.md)
+- [POR_MEJORAR.md](file:///c:/Users/angel.gaxiola/Documents/angel/agenda-medica/POR_MEJORAR.md)

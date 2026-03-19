@@ -1,13 +1,13 @@
+using AgendaMedica.Middleware;
 using AgendaMedica.Models;
 using AgendaMedica.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.SqlClient;
 
 namespace AgendaMedica.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class CitasController(CitaService citaService) : ControllerBase
+public class CitasController(ICitaService citaService) : ControllerBase
 {
     [HttpPost("agendar")]
     public async Task<ActionResult<CitaResponse>> Agendar(AgendarCitaRequest request)
@@ -17,8 +17,8 @@ public class CitasController(CitaService citaService) : ControllerBase
             var cita = await citaService.AgendarAsync(request);
             return Created(string.Empty, cita);
         }
-        catch (SqlException ex) when (
-            ex.Number >= 50000
+        catch (RulesException ex) when (
+            ex.StatusCode == 409
             && (
                 ex.Message.Contains("ya tiene una cita", StringComparison.OrdinalIgnoreCase)
                 || ex.Message.Contains("fuera del horario de consulta", StringComparison.OrdinalIgnoreCase)
@@ -31,7 +31,7 @@ public class CitasController(CitaService citaService) : ControllerBase
             {
                 sugerencias = await citaService.SugerirHorariosAsync(request.MedicoId, request.Fecha, request.HoraInicio, 3);
             }
-            catch (SqlException)
+            catch (RulesException)
             {
             }
 

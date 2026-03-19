@@ -1,6 +1,8 @@
 # .NET
 AgendaMedica/bin/
 AgendaMedica/obj/
+AgendaMedica.Tests/bin/
+AgendaMedica.Tests/obj/
 AgendaMedica/Properties/
 
 # Flyway — credenciales locales
